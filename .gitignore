@@ -1,0 +1,8 @@
+js/node_modules
+js/package-lock.json
+js/embed.wasm
+python/__pycache__
+csharp/bin
+csharp/obj
+lib-rs/target
+lib-rs/Cargo.lock
