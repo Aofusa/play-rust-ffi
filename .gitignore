@@ -6,3 +6,5 @@ csharp/bin
 csharp/obj
 lib-rs/target
 lib-rs/Cargo.lock
+Cargo.lock
+target

@@ -5,6 +5,7 @@ authors = ["Aofusa <5000enPCinAOFUSA@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+nalgebra = "0.16.0"
 
 [lib]
 name = "embed"
