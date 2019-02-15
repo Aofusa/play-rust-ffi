@@ -22,7 +22,8 @@ fetch('embed.wasm')
 
         const length = 5;
         const ptr = instance.exports.alloc(length);
-        const arr = new DataView(instance.exports.memory.buffer, ptr, length*4);
+        // const arr = new Int32Array(instance.exports.memory.buffer, ptr, length*Int32Array.BYTES_PER_ELEMENT);
+        const arr = new DataView(instance.exports.memory.buffer, ptr, length*Int32Array.BYTES_PER_ELEMENT);
         arr.setInt32(0, 1, true);
         arr.setInt32(4, 2, true);
         arr.setInt32(8, 3, true);
@@ -31,7 +32,7 @@ fetch('embed.wasm')
 
         var show_data = [];
         for (var i=0; i < length; i++) {
-            const data = arr.getInt32(i*4, true);
+            const data = arr.getInt32(i*Int32Array.BYTES_PER_ELEMENT, true);
             show_data.push(data);
         }
         console.log("[before] arr = " + JSON.stringify(show_data));
@@ -40,7 +41,7 @@ fetch('embed.wasm')
 
         show_data = [];
         for (var i=0; i < length; i++) {
-            const data = arr.getInt32(i*4, true);
+            const data = arr.getInt32(i*Int32Array.BYTES_PER_ELEMENT, true);
             show_data.push(data);
         }
         console.log("[after]  arr = " + JSON.stringify(show_data));
