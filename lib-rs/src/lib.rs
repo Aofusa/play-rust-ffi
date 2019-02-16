@@ -1,9 +1,12 @@
 
 extern crate nalgebra as na;
+extern crate rayon;
 
 use std::os::raw::{c_int, c_double, c_void};
 use std::slice;
 use std::mem;
+
+use rayon::prelude::*;
 
 #[no_mangle]
 pub fn alloc(size: usize) -> *mut c_void {
@@ -34,4 +37,13 @@ pub extern fn rust_array(array: *mut c_int, length: c_int, v: c_int) {
     for idx in 0..length as usize {
         unsafe { (*array)[idx] += v; }
     }
+}
+
+#[no_mangle]
+pub extern fn rust_sort(array: *mut c_int, length: c_int) {
+    assert!(!array.is_null(), "Null pointer exception.");
+
+    let array: *mut [c_int] = unsafe { slice::from_raw_parts_mut(array, length as usize) };
+
+    unsafe { (*array).par_sort() };
 }
